@@ -1,0 +1,142 @@
+ATM MANAGEMENT SYSTEM — PYTHON OOP MINI PROJECT
+==================================================
+
+1. PROJECT OVERVIEW
+-------------------
+Project Name: ATM Management System
+Language: Python 3
+Project Type: Console-based mini project
+Programming Approach: Object-Oriented Programming (OOP)
+Dependencies: Python standard library only; no external packages required.
+
+This project simulates basic ATM operations using dummy account details. It is intended
+for learning and demonstration, not for real banking use. Account data and transactions
+are stored in memory and reset when the program exits.
+
+2. OBJECTIVES
+-------------
+- Authenticate a user using a PIN with a maximum of three attempts.
+- Support cash withdrawal and deposits.
+- Display the current account balance.
+- Change the PIN after verifying the current PIN and a demo OTP.
+- Display transaction history.
+- Demonstrate OOP principles, input validation, exceptions, and modular design.
+
+3. FEATURES
+-----------
+1. PIN authentication with three attempts.
+2. Card blocking for the current program session after three incorrect PIN attempts.
+3. Withdrawals in positive multiples of ₹100, subject to available balance.
+4. Deposits in positive multiples of ₹100.
+5. Balance inquiry with a masked account number.
+6. PIN change with current-PIN verification, demo OTP, and confirmation of the new PIN.
+7. Transaction history including date/time, type, amount, and resulting balance.
+8. Friendly error messages for invalid input, invalid amounts, and insufficient balance.
+9. Exit option.
+
+4. OOP CONCEPTS USED
+--------------------
+A. Classes and Objects
+   - BankAccount, ATM, and Transaction are classes.
+   - main() creates BankAccount and ATM objects; transactions are represented by
+     Transaction objects.
+
+B. Encapsulation
+   - BankAccount keeps the PIN, full account number, balance, and transaction list in
+     private attributes such as __pin, __account_number, __balance, and __transactions.
+   - Public methods control access to account operations.
+   - The account number is displayed in masked form.
+
+C. Abstraction
+   - The ATM class hides menu, authentication, and input-handling details behind methods
+     such as run(), authenticate(), and _change_pin_flow().
+   - The caller uses methods like withdraw() and deposit() without directly changing
+     the balance.
+
+D. Composition
+   - ATM has a BankAccount object.
+   - BankAccount contains a list of Transaction objects.
+
+E. Constructor (__init__)
+   - Initializes account and ATM objects with their required state.
+
+F. Properties
+   - balance and account_number provide controlled read access to account information.
+
+G. Exception Handling
+   - ValueError is raised for invalid deposit/withdrawal amounts and invalid PIN format.
+   - try/except blocks show user-friendly messages instead of crashing for these cases.
+
+H. Class Attributes
+   - MAX_PIN_ATTEMPTS is a class attribute shared by ATM objects.
+
+Note: Inheritance and polymorphism are not forced into the design because they do not
+provide a meaningful benefit for this small application. They can be added in a future
+extension if needed.
+
+5. PROJECT STRUCTURE
+--------------------
+ATM_OOP_Mini_Project/
+|-- ATM.py
+|-- ProjectDetails.txt
+|-- README.md
+
+6. HOW TO RUN
+-------------
+Requirements: Python 3.9+ recommended. No pip installation is required.
+
+Steps:
+1. Extract the project ZIP file.
+2. Open a terminal or command prompt in the extracted folder.
+3. Run:
+       python ATM.py
+   On some Linux systems, use:
+       python3 ATM.py
+
+Demo PIN: 1234
+Opening balance: ₹1000
+Use only the dummy credentials supplied in this project.
+
+7. SAMPLE TEST SCENARIOS
+------------------------
+- Correct PIN: enter 1234 and confirm that the menu appears.
+- Incorrect PIN: enter a wrong PIN three times and confirm that the session ends.
+- Withdrawal success: withdraw ₹500 from a ₹1000 balance; balance should become ₹500.
+- Insufficient balance: attempt to withdraw ₹1500; balance should not change.
+- Invalid amount: try ₹250; the operation should be rejected because it is not a multiple
+  of ₹100.
+- Deposit success: deposit ₹200; balance should increase by ₹200.
+- Invalid deposit: enter zero, a negative amount, or a non-multiple of ₹100.
+- Balance inquiry: check that the displayed balance matches prior transactions.
+- PIN change: provide the current PIN, the displayed demo OTP, and matching four-digit
+  new PIN entries; then verify that the new PIN works.
+- Transaction history: verify that successful deposits and withdrawals are listed.
+- Invalid menu option: enter a value outside 1–6.
+
+8. VALIDATION AND DESIGN NOTES
+------------------------------
+- The project uses dummy credentials; do not place real banking information in source code.
+- The OTP is printed to the console for demonstration. A production system must deliver
+  OTPs through a trusted, secure channel.
+- Data is not persisted to a database or file; it resets after program termination.
+- This program is a learning simulation and is not suitable for real financial transactions.
+- Account balance is represented as a float for simplicity in this educational project.
+  Production financial software should use Decimal or integer minor currency units.
+
+9. POSSIBLE FUTURE ENHANCEMENTS
+-------------------------------
+- Save accounts and transactions in SQLite or MySQL.
+- Add separate User, Card, and ATM classes.
+- Add an abstract transaction class with Withdrawal and Deposit subclasses to demonstrate
+  inheritance and polymorphism.
+- Add automated unit tests using unittest or pytest.
+- Add admin functionality, account lockout persistence, and secure OTP delivery.
+- Use Decimal for monetary values and add logging.
+
+10. CONCLUSION
+--------------
+This mini project converts a dictionary-and-loop-based ATM script into a structured
+object-oriented Python application. It demonstrates classes, objects, encapsulation,
+abstraction, composition, constructors, properties, exception handling, and separation
+of responsibilities while preserving the original core features and extending them with
+transaction history and stronger validation.
